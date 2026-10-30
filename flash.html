@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TSD10版（版3.0）ソフト一式ダウンロード ＆ ブラウザ直接書き込みツール</title>
+<style>
+  :root {
+    --navy: #0f172a;
+    --blue: #2563eb;
+    --green: #16a34a;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --line: #cbd5e1;
+    --muted: #475569;
+    --warn: #d97706;
+    --danger: #dc2626;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Meiryo", "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--navy);
+    line-height: 1.65;
+  }
+  .topbar {
+    background: #0f172a;
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 3px 12px rgba(15,23,42,0.2);
+  }
+  .topbar-inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.78rem;
+    padding: 0.22rem 0.6rem;
+    border-radius: 6px;
+  }
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.26);
+    padding: 0.35rem 0.8rem;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+  .nav-link:hover { background: rgba(255,255,255,0.25); }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 1.4rem 1.1rem 4rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 58%, #0284c7 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 1.5rem 1.7rem;
+    box-shadow: 0 8px 24px rgba(30,58,138,0.18);
+  }
+  .hero h1 { margin: 0 0 0.45rem 0; font-size: 1.45rem; line-height: 1.35; }
+  .hero p { margin: 0; color: #e0f2fe; font-size: 0.94rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.4rem 1.5rem;
+    box-shadow: 0 2px 10px rgba(15,23,42,0.03);
+  }
+  .card h2 {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 0.65rem;
+  }
+  .step-tag {
+    background: var(--blue);
+    color: #fff;
+    font-size: 0.78rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .zip-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1.12rem;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(37,99,235,0.28);
+    transition: transform 0.12s, background 0.15s;
+    text-align: center;
+  }
+  .zip-btn:hover { background: linear-gradient(135deg, #1d4ed8, #1e40af); transform: translateY(-1px); }
+  .dl-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.95rem;
+  }
+  @media (max-width: 720px) {
+    .dl-grid { grid-template-columns: 1fr; }
+    .card { padding: 1.1rem; }
+  }
+  .dl-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    transition: all 0.15s;
+  }
+  .dl-item:hover { background: #eff6ff; border-color: #60a5fa; }
+  .dl-name { font-weight: 800; font-size: 0.9rem; color: #1e3a8a; }
+  .dl-desc { font-size: 0.77rem; color: var(--muted); }
+  .dl-pill {
+    background: #dbeafe;
+    color: #1e40af;
+    font-weight: 800;
+    font-size: 0.76rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 7px;
+    white-space: nowrap;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin: 0.8rem 0;
+  }
+  @media (max-width: 720px) { .form-grid { grid-template-columns: 1fr; } }
+  .field label {
+    display: block;
+    font-weight: 800;
+    font-size: 0.86rem;
+    margin-bottom: 0.3rem;
+  }
+  .field input[type="text"], .field input[type="password"] {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.65rem 0.8rem;
+    border: 1.5px solid #94a3b8;
+    border-radius: 9px;
+    background: #fff;
+    color: #0f172a;
+  }
+  .field input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+  .flash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.95rem 1.4rem;
+    background: linear-gradient(135deg, #16a34a, #15803d);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.06rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(22,163,74,0.28);
+    width: 100%;
+    transition: all 0.15s;
+  }
+  .flash-btn:hover:not(:disabled) { background: linear-gradient(135deg, #15803d, #166534); }
+  .flash-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .sub-btn {
+    padding: 0.65rem 1rem;
+    background: #f8fafc;
+    color: #1e3a8a;
+    border: 1.5px solid #94a3b8;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .sub-btn:hover:not(:disabled) { background: #eff6ff; border-color: #3b82f6; }
+  .prog-wrap {
+    margin-top: 0.9rem;
+    background: #e2e8f0;
+    height: 12px;
+    border-radius: 99px;
+    overflow: hidden;
+    display: none;
+  }
+  .prog-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    transition: width 0.2s;
+  }
+  .console-box {
+    margin-top: 0.9rem;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.83rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    max-height: 260px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .verdict-ok {
+    margin-top: 1rem;
+    background: #dcfce7;
+    border: 2px solid #22c55e;
+    color: #14532d;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: none;
+  }
+  .verdict-ng {
+    margin-top: 1rem;
+    background: #fff7ed;
+    border: 2px solid #f97316;
+    color: #7c2d12;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: none;
+  }
+  .note-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-left: 5px solid #0284c7;
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    color: #0c4a6e;
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;align-items:center;gap:0.65rem;">
+      <span class="badge">TSD10版 版3.0</span>
+      <b>別PC用 ソフト一式ダウンロード ＆ ブラウザ書き込み</b>
+    </div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+      <a class="nav-link" href="./index.html">📖 作成マニュアルへ戻る</a>
+      <a class="nav-link" href="./manual_a4.pdf" target="_blank">🖨️ A4印刷用PDF</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>どのパソコンからでもすぐ書き込めます（TSD10版・版3.0）</h1>
+    <p>フタを開けたまま USB で Pico W をパソコンに挿し、<b>① ブラウザ（Chrome / Edge）からソフト導入なしで直接書き込む</b> か、<b>② ZIP 一式をダウンロードして .bat / Thonny で書き込む</b> のどちらかやりやすい方を選んでください。<br>
+    ※初期設定は <b>🧪 試験モード ON（本番のチャイム箱は鳴らさず記録のみ・名前 <code>nyuten-sensor2</code>）</b> なので安全に通電テストできます。</p>
+  </section>
+
+  <!-- Card 1: Browser Direct Web Serial Flasher -->
+  <section class="card" id="web-flasher">
+    <h2><span class="step-tag" style="background:#16a34a;">おすすめ・ソフト不要</span> Chrome / Edge から直接 Pico W に一発書き込み＆動作チェック</h2>
+
+    <div class="note-box" style="margin-bottom:0.9rem;">
+      <b>💡 新品の Pico W を箱から出したばかりのときだけ（3秒）：</b><br>
+      USB を挿したときにパソコンに <b><code>RPI-RP2</code> ドライブ</b> が開いた場合は、先に下のボタンから <b>MicroPython 本体（.uf2）</b> をダウンロードして <code>RPI-RP2</code> ドライブへドラッグ＆ドロップしてください（数秒でドライブが閉じて COM ポートになり、下のボタンから書き込めるようになります）。
+      <div style="margin-top:0.5rem;">
+        <a href="./downloads/RPI_PICO_W-20241129-v1.24.1.uf2" download="RPI_PICO_W-20241129-v1.24.1.uf2" style="display:inline-block;background:#0284c7;color:#fff;text-decoration:none;font-weight:800;font-size:0.84rem;padding:0.4rem 0.85rem;border-radius:8px;">⬇️ 新品 Pico W 用 MicroPython 本体 (.uf2) をダウンロード</a>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="ssid">① Wi-Fi 名（SSID・2.4GHz）</label>
+        <input id="ssid" type="text" placeholder="例: MyShop_WiFi" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="wpass">② Wi-Fi パスワード <label style="font-weight:normal;font-size:0.8rem;margin-left:8px;cursor:pointer;"><input type="checkbox" onchange="document.getElementById('wpass').type=this.checked?'text':'password'"> 表示する</label></label>
+        <input id="wpass" type="password" placeholder="Wi-Fiのパスワード" autocomplete="off">
+      </div>
+    </div>
+    <div style="font-size:0.79rem;color:var(--muted);margin-bottom:0.85rem;">
+      🔒 入力した Wi-Fi 名とパスワードはこのブラウザ内だけで <code>wifi_secret.py</code> を作って目の前の USB ケーブルへ送るためだけに使われます（外部サーバーへの送信は一切ありません）。
+    </div>
+
+    <button class="flash-btn" id="btn-flash" onclick="runWebFlash()">
+      🔌 USB接続した Pico W に一発書き込み ＆ 49〜50件/秒 チェック開始
+    </button>
+
+    <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.65rem;align-items:center;justify-content:space-between;">
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="sub-btn" id="btn-recheck" onclick="runDiagOnly()">🔄 2.2kΩカット後に診断（件/秒）だけもう一度見る</button>
+        <button class="sub-btn" onclick="downloadWifiSecret()">💾 入力した設定で wifi_secret.py をダウンロード</button>
+      </div>
+      <label style="font-size:0.8rem;color:var(--muted);cursor:pointer;">
+        <input type="checkbox" id="all-ports"> COMポートが出ないとき全ポートを表示
+      </label>
+    </div>
+
+    <div id="webserial-warn" style="display:none;margin-top:0.8rem;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;padding:0.75rem 1rem;border-radius:10px;font-size:0.88rem;font-weight:700;">
+      ⚠️ お使いのブラウザは Web Serial API に対応していません（Safari / Firefox / スマホ等）。パソコンの <b>Google Chrome</b> または <b>Microsoft Edge</b> で開くか、下の「ソフト一式まとめてダウンロード (.zip)」をお使いください。
+    </div>
+
+    <div class="prog-wrap" id="prog-wrap"><div class="prog-bar" id="prog-bar"></div></div>
+    <div id="status-line" style="margin-top:0.55rem;font-weight:800;font-size:0.9rem;color:#1e3a8a;"></div>
+
+    <!-- Verdict Cards -->
+    <div class="verdict-ok" id="verdict-ok"></div>
+    <div class="verdict-ng" id="verdict-ng"></div>
+
+    <div class="console-box" id="console-log">ここに書き込み状況と Pico W からの診断結果（A / B の件/秒・IPアドレス）が表示されます…</div>
+  </section>
+
+  <!-- Card 2: Full ZIP & Individual File Downloads -->
+  <section class="card" id="downloads">
+    <h2><span class="step-tag">ZIP一式・個別DL</span> ソフト一式をダウンロードして使う（.bat 自動書き込み ／ Thonny 用）</h2>
+
+    <a class="zip-btn" href="./downloads/TSD10_v3.0_full_set.zip" download="TSD10版_ソフト一式_版3.0.zip">
+      📦 TSD10版 ソフト一式（版3.0）をまとめてダウンロード (.zip / 約0.7MB)
+    </a>
+    <div style="font-size:0.83rem;color:var(--muted);margin-top:0.5rem;">
+      ※同梱内容：<code>TSD10_センサー箱に入れる/</code>（<code>app.mpy</code>, <code>main.py</code>, <code>wifi_secret.py</code>ひな形）、<code>PicoWに書き込んで動作チェック.bat</code>、新品Pico W用 <code>.uf2</code>、OTA更新用 <code>.mpy</code>、ソース一式、手順メモ
+    </div>
+
+    <div class="dl-grid">
+      <a class="dl-item" href="./downloads/app.mpy" download="app.mpy">
+        <div>
+          <div class="dl-name">app.mpy（版3.0 本体）</div>
+          <div class="dl-desc">Pico W に入れる本体プログラム（vl53l0x.py は不要）</div>
+        </div>
+        <span class="dl-pill">DL</span>
+      </a>
+      <a class="dl-item" href="./downloads/main.py" download="main.py">
+        <div>
+          <div class="dl-name">main.py（起動役・版3）</div>
+          <div class="dl-desc">自動ロールバック付きランチャー</div>
+        </div>
+        <span class="dl-pill">DL</span>
+      </a>
+      <a class="dl-item" href="./downloads/RPI_PICO_W-20241129-v1.24.1.uf2" download="RPI_PICO_W-20241129-v1.24.1.uf2">
+        <div>
+          <div class="dl-name">RPI_PICO_W-v1.24.1.uf2</div>
+          <div class="dl-desc">新品の Pico W（RPI-RP2 ドライブ）に入れる MicroPython 本体</div>
+        </div>
+        <span class="dl-pill">DL</span>
+      </a>
+      <a class="dl-item" href="./downloads/sensor_tsd10_v3.0.mpy" download="センサー箱_TSD10版3.0.mpy">
+        <div>
+          <div class="dl-name">センサー箱_TSD10版3.0.mpy</div>
+          <div class="dl-desc">今後のスマホ状態ページからのブラウザ更新（OTA）用</div>
+        </div>
+        <span class="dl-pill">DL</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<script>
+if (!('serial' in navigator)) {
+  document.getElementById('webserial-warn').style.display = 'block';
+}
+
+const logEl = document.getElementById('console-log');
+const statusEl = document.getElementById('status-line');
+const progWrap = document.getElementById('prog-wrap');
+const progBar = document.getElementById('prog-bar');
+
+function logMsg(s) {
+  logEl.textContent += s + '\n';
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function setProgress(pct, msg) {
+  progWrap.style.display = 'block';
+  progBar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  if (msg !== undefined) statusEl.textContent = msg;
+}
+
+function pyQuote(s) {
+  return '"' + String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r/g, '').replace(/\n/g, '') + '"';
+}
+
+function makeWifiSecretBytes(ssid, pass) {
+  const txt = '# -*- coding: utf-8 -*-\nWIFI_SSID = ' + pyQuote(ssid) + '\nWIFI_PASS = ' + pyQuote(pass) + '\n';
+  return new TextEncoder().encode(txt);
+}
+
+function downloadWifiSecret() {
+  const ssid = document.getElementById('ssid').value.trim();
+  const pass = document.getElementById('wpass').value;
+  if (!ssid) {
+    alert('上の欄に Wi-Fi 名（SSID）を入力してから押してください。');
+    document.getElementById('ssid').focus();
+    return;
+  }
+  const bytes = makeWifiSecretBytes(ssid, pass);
+  const blob = new Blob([bytes], { type: 'text/x-python;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'wifi_secret.py';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function u8ToB64(u8) {
+  let s = '';
+  for (let i = 0; i < u8.length; i++) s += String.fromCharCode(u8[i]);
+  return btoa(s);
+}
+
+class PicoSerialSession {
+  constructor(port) {
+    this.port = port;
+    this.rx = [];
+    this.reading = false;
+    this.reader = null;
+    this.writer = null;
+  }
+  async open() {
+    await this.port.open({ baudRate: 115200, bufferSize: 16384 });
+    try { await this.port.setSignals({ dataTerminalReady: true, requestToSend: true }); } catch (_) {}
+    this.writer = this.port.writable.getWriter();
+    this.reader = this.port.readable.getReader();
+    this.reading = true;
+    this._readLoop();
+  }
+  async _readLoop() {
+    try {
+      while (this.reading) {
+        const { value, done } = await this.reader.read();
+        if (done) break;
+        if (value) {
+          for (let i = 0; i < value.length; i++) this.rx.push(value[i]);
+        }
+      }
+    } catch (_) {}
+  }
+  clearRx() { this.rx.length = 0; }
+  rxString() { return new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(this.rx)); }
+  async writeBytes(u8) {
+    for (let i = 0; i < u8.length; i += 256) {
+      await this.writer.write(u8.slice(i, i + 256));
+      if (i + 256 < u8.length) await sleep(5);
+    }
+  }
+  async writeStr(s) { await this.writeBytes(new TextEncoder().encode(s)); }
+  async enterRawRepl() {
+    for (let i = 0; i < 3; i++) {
+      await this.writeBytes(new Uint8Array([13, 3, 3]));
+      await sleep(160);
+    }
+    this.clearRx();
+    await this.writeBytes(new Uint8Array([13, 1]));
+    const t0 = Date.now();
+    while (Date.now() - t0 < 4500) {
+      const txt = this.rxString();
+      if (txt.includes('raw REPL; CTRL-B to exit') && txt.trimEnd().endsWith('>')) return;
+      await sleep(30);
+    }
+    throw new Error('Pico W の書き込みモード(Raw REPL)に入れませんでした。新品の Pico W の場合は先に .uf2 を RPI-RP2 ドライブへ入れてください。また Thonny が開いている場合は閉じてください。');
+  }
+  async rawExec(code, timeoutMs = 15000) {
+    this.clearRx();
+    await this.writeStr(code);
+    await this.writeBytes(new Uint8Array([4]));
+    const t0 = Date.now();
+    while (Date.now() - t0 < timeoutMs) {
+      const b = this.rx;
+      if (b.length >= 5 && b[0] === 0x4F && b[1] === 0x4B && b[b.length - 1] === 0x3E) {
+        let eot1 = -1, eot2 = -1;
+        for (let i = 2; i < b.length - 1; i++) {
+          if (b[i] === 0x04) {
+            if (eot1 < 0) eot1 = i; else { eot2 = i; break; }
+          }
+        }
+        if (eot1 >= 0 && eot2 > eot1) {
+          const out = new TextDecoder().decode(new Uint8Array(b.slice(2, eot1)));
+          const err = new TextDecoder().decode(new Uint8Array(b.slice(eot1 + 1, eot2))).trim();
+          if (err) throw new Error('Pico側エラー: ' + err);
+          return out;
+        }
+      }
+      await sleep(15);
+    }
+    throw new Error('Pico W からの応答がタイムアウトしました。USBケーブルを挿し直してもう一度お試しください。');
+  }
+  async uploadFile(name, u8, onChunk) {
+    const total = u8.length;
+    const tmp = name + '.tmp';
+    await this.rawExec(`import ubinascii, os\n_f = open(${pyQuote(tmp)}, 'wb')\n`);
+    const step = 768;
+    for (let i = 0; i < total; i += step) {
+      const b64 = u8ToB64(u8.slice(i, i + step));
+      await this.rawExec(`_f.write(ubinascii.a2b_base64('${b64}'))\n`);
+      if (onChunk) onChunk(Math.min(total, i + step), total);
+    }
+    const out = await this.rawExec(
+      `_f.close()\n_sz = os.stat(${pyQuote(tmp)})[6]\nassert _sz == ${total}, (_sz, ${total})\n` +
+      `try:\n os.remove(${pyQuote(name)})\nexcept OSError:\n pass\n` +
+      `os.rename(${pyQuote(tmp)}, ${pyQuote(name)})\nprint(_sz)\n`
+    );
+    if (parseInt(out.trim(), 10) !== total) throw new Error(name + ' のサイズ検証に失敗しました');
+  }
+  async close() {
+    this.reading = false;
+    try { if (this.reader) await this.reader.cancel(); } catch (_) {}
+    try { if (this.reader) this.reader.releaseLock(); } catch (_) {}
+    try { if (this.writer) this.writer.releaseLock(); } catch (_) {}
+    try { await this.port.close(); } catch (_) {}
+  }
+}
+
+function showVerdict(hza, infoA, hzb, infoB, ip) {
+  const okEl = document.getElementById('verdict-ok');
+  const ngEl = document.getElementById('verdict-ng');
+  okEl.style.display = 'none';
+  ngEl.style.display = 'none';
+  const okA = (hza >= 45 && hza <= 55);
+  const okB = (hzb >= 45 && hzb <= 55);
+  const ipBtn = (ip && ip !== '-') ? `<div style="margin-top:0.65rem;"><a href="http://${ip}/" target="_blank" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;font-weight:800;padding:0.5rem 1rem;border-radius:8px;">🌐 状態ページ (http://${ip}/) を新しいタブで開く</a></div>` : '';
+  if (okA && okB) {
+    okEl.style.display = 'block';
+    okEl.innerHTML =
+      `<div style="font-size:1.12rem;font-weight:800;">🎉 大成功・一発合格！ A・B ともに正常通信しています！</div>` +
+      `<div style="margin-top:0.35rem;font-weight:700;">・センサーA（ドア側・7番ピン）：<b>${hza} 件/秒</b> [${infoA}] ✅<br>・センサーB（店内側・17番ピン）：<b>${hzb} 件/秒</b> [${infoB}] ✅</div>` +
+      `<div style="margin-top:0.4rem;font-size:0.9rem;">👉 <b>2.2kΩ の抵抗は切らずにそのまま</b>でOKです！配線を中央に寄せてフタをパチンと閉じて完成です。</div>` +
+      ipBtn;
+  } else {
+    ngEl.style.display = 'block';
+    let tips = '';
+    if (!okA) tips += '<li><b>センサーA側（0または少ない）</b>：7番〜8番ピンの間にある <b><code>2.2kΩ</code> の足だけ</b>（黒線より上）をニッパーで切ってください。</li>';
+    if (!okB) tips += '<li><b>センサーB側（0または少ない）</b>：17番〜18番ピンの間にある <b><code>2.2kΩ</code> の足だけ</b>（黒線より上）をニッパーで切ってください。</li>';
+    ngEl.innerHTML =
+      `<div style="font-size:1.08rem;font-weight:800;">✂️ 測定結果：A = ${hza} 件/秒 [${infoA}] ／ B = ${hzb} 件/秒 [${infoB}]</div>` +
+      `<ul style="margin:0.45rem 0;padding-left:1.3rem;font-size:0.9rem;">${tips}</ul>` +
+      `<div style="font-size:0.86rem;">※ニッパーで切ったあと、上の<b>「🔄 2.2kΩカット後に診断だけもう一度見る」</b>ボタンを押すとすぐに 50件/秒 になったか確認できます！（切っても0件なら 40番5V赤線・GND黒線・緑t線のはんだを確認）</div>` +
+      ipBtn;
+  }
+}
+
+async function monitorBootAndDiagnose(sess) {
+  setProgress(88, 'Pico W を起動してセンサーA・Bの通信回数（49〜50件/秒）を測定中（約8〜15秒）…');
+  await sess.writeBytes(new Uint8Array([2])); // Ctrl-B normal REPL
+  await sleep(100);
+  sess.clearRx();
+  await sess.writeBytes(new Uint8Array([4])); // Ctrl-D soft reboot
+
+  let printedLen = 0;
+  let diags = [];
+  let foundIp = '-';
+  const reIp = /http:\/\/(\d+\.\d+\.\d+\.\d+)\//;
+  const reDiag = /\[TSD10診断\]\s*A:(\d+)件\/秒\(([^)]+)\)\s*\|\s*B:(\d+)件\/秒\(([^)]+)\)\s*\|\s*IP:(\S+)/g;
+
+  const t0 = Date.now();
+  while (Date.now() - t0 < 25000) {
+    await sleep(200);
+    const full = sess.rxString();
+    if (full.length > printedLen) {
+      const delta = full.slice(printedLen);
+      printedLen = full.length;
+      logEl.textContent += delta;
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+    const mIp = full.match(reIp);
+    if (mIp) foundIp = mIp[1];
+    diags = [];
+    let m;
+    reDiag.lastIndex = 0;
+    while ((m = reDiag.exec(full)) !== null) {
+      diags.push({ hza: parseInt(m[1], 10), ia: m[2], hzb: parseInt(m[3], 10), ib: m[4], ip: m[5] });
+    }
+    if (diags.length >= 2) break;
+  }
+  setProgress(100, '完了しました！');
+  if (diags.length > 0) {
+    const last = diags[diags.length - 1];
+    const ip = (last.ip && last.ip !== '-') ? last.ip : foundIp;
+    showVerdict(last.hza, last.ia, last.hzb, last.ib, ip);
+  } else {
+    statusEl.textContent = '書き込みは完了しましたが、時間内に診断行を取得できませんでした（上の黒い画面のログを確認してください）。';
+  }
+}
+
+async function requestPicoPort() {
+  if (!('serial' in navigator)) {
+    alert('Google Chrome または Microsoft Edge で開いてください。');
+    return null;
+  }
+  const all = document.getElementById('all-ports').checked;
+  const opts = all ? {} : { filters: [{ usbVendorId: 0x2e8a }] };
+  return await navigator.serial.requestPort(opts);
+}
+
+async function runWebFlash() {
+  const ssid = document.getElementById('ssid').value.trim();
+  const pass = document.getElementById('wpass').value;
+  if (!ssid) {
+    alert('先に ① Wi-Fi 名（SSID）を入力してください。');
+    document.getElementById('ssid').focus();
+    return;
+  }
+  const btn = document.getElementById('btn-flash');
+  const btn2 = document.getElementById('btn-recheck');
+  document.getElementById('verdict-ok').style.display = 'none';
+  document.getElementById('verdict-ng').style.display = 'none';
+
+  let port;
+  try {
+    port = await requestPicoPort();
+    if (!port) return;
+  } catch (e) {
+    return; // user cancelled picker
+  }
+
+  btn.disabled = true; btn2.disabled = true;
+  logEl.textContent = '';
+  let sess = new PicoSerialSession(port);
+  try {
+    setProgress(5, '最新ファイル（app.mpy / main.py）を取得しています…');
+    const [rMain, rApp] = await Promise.all([
+      fetch('./downloads/main.py', { cache: 'no-store' }),
+      fetch('./downloads/app.mpy', { cache: 'no-store' })
+    ]);
+    if (!rMain.ok || !rApp.ok) throw new Error('書き込み用ファイルの取得に失敗しました');
+    const u8Wifi = makeWifiSecretBytes(ssid, pass);
+    const u8Main = new Uint8Array(await rMain.arrayBuffer());
+    const u8App  = new Uint8Array(await rApp.arrayBuffer());
+
+    setProgress(12, 'Pico W に接続しています…');
+    await sess.open();
+    await sess.enterRawRepl();
+    logMsg('✅ Pico W に接続しました（書き込みモード開始）');
+
+    await sess.rawExec(
+      "import os\nfor _fn in ('app_ok.flag','app_new.mpy','app_prev.mpy','app_bad.mpy','crash.txt'):\n" +
+      " try:\n  os.remove(_fn)\n except OSError:\n  pass\n"
+    );
+
+    setProgress(18, '1/3: wifi_secret.py を書き込んでいます…');
+    await sess.uploadFile('wifi_secret.py', u8Wifi);
+    logMsg('✅ [1/3] wifi_secret.py 書き込み完了（パスワード非表示）');
+
+    setProgress(25, '2/3: main.py を書き込んでいます…');
+    await sess.uploadFile('main.py', u8Main);
+    logMsg(`✅ [2/3] main.py 書き込み完了 (${u8Main.length} bytes)`);
+
+    setProgress(32, '3/3: app.mpy（TSD10版 3.0）を書き込んでいます…');
+    await sess.uploadFile('app.mpy', u8App, (done, tot) => {
+      const pct = 32 + Math.round((done / tot) * 52);
+      setProgress(pct, `3/3: app.mpy 転送中… ${Math.round(done / tot * 100)}% (${done} / ${tot} bytes)`);
+    });
+    logMsg(`✅ [3/3] app.mpy 書き込み・サイズ検証完了 (${u8App.length} bytes)`);
+    logMsg('------------------------------------------------------------');
+
+    await monitorBootAndDiagnose(sess);
+  } catch (e) {
+    statusEl.textContent = '❌ エラー: ' + e.message;
+    logMsg('\n❌ ' + e.message);
+  } finally {
+    await sess.close();
+    btn.disabled = false; btn2.disabled = false;
+  }
+}
+
+async function runDiagOnly() {
+  const btn = document.getElementById('btn-flash');
+  const btn2 = document.getElementById('btn-recheck');
+  document.getElementById('verdict-ok').style.display = 'none';
+  document.getElementById('verdict-ng').style.display = 'none';
+  let port;
+  try {
+    port = await requestPicoPort();
+    if (!port) return;
+  } catch (e) { return; }
+
+  btn.disabled = true; btn2.disabled = true;
+  logEl.textContent = '';
+  let sess = new PicoSerialSession(port);
+  try {
+    setProgress(20, 'Pico W に接続して再起動・再測定しています…');
+    await sess.open();
+    await sess.enterRawRepl();
+    await monitorBootAndDiagnose(sess);
+  } catch (e) {
+    statusEl.textContent = '❌ エラー: ' + e.message;
+    logMsg('\n❌ ' + e.message);
+  } finally {
+    await sess.close();
+    btn.disabled = false; btn2.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
