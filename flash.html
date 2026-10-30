@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TSD10版（版3.0）ソフト一式ダウンロード ＆ ブラウザ直接書き込みツール</title>
+<title>TSD10版（版3.1）Wi-Fi更新ファイル ＆ ソフト一式ダウンロード・書き込みツール</title>
 <style>
   :root {
     --navy: #0f172a;
@@ -269,8 +269,8 @@
 <header class="topbar">
   <div class="topbar-inner">
     <div style="display:flex;align-items:center;gap:0.65rem;">
-      <span class="badge">TSD10版 版3.0</span>
-      <b>別PC用 ソフト一式ダウンロード ＆ ブラウザ書き込み</b>
+      <span class="badge">TSD10版 最新 版3.1</span>
+      <b>Wi-Fi経由アップデート ＆ ソフト一式DL・ブラウザ書き込み</b>
     </div>
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
       <a class="nav-link" href="./index.html">📖 作成マニュアルへ戻る</a>
@@ -281,14 +281,31 @@
 
 <div class="wrap">
   <section class="hero">
-    <h1>どのパソコンからでもすぐ書き込めます（TSD10版・版3.0）</h1>
-    <p>フタを開けたまま USB で Pico W をパソコンに挿し、<b>① ブラウザ（Chrome / Edge）からソフト導入なしで直接書き込む</b> か、<b>② ZIP 一式をダウンロードして .bat / Thonny で書き込む</b> のどちらかやりやすい方を選んでください。<br>
-    ※初期設定は <b>🧪 試験モード ON（本番のチャイム箱は鳴らさず記録のみ・名前 <code>nyuten-sensor2</code>）</b> なので安全に通電テストできます。</p>
+    <h1>Wi-Fi 経由のアップデート ＆ Wi-Fi 2件登録に対応（最新・版3.1）</h1>
+    <p><b>すでに動いているセンサー箱</b>は、USBケーブル不要で<b>スマホやPCから Wi-Fi 経由でそのまま版3.1へ更新</b>でき、更新後に画面から<b>2つ目の Wi-Fi（お店／自宅）を追加登録</b>できます。<br>
+    新しく別の Pico W に書き込む場合も、下のブラウザ直接書き込み（最大2つのWi-Fi同時登録可）または ZIP 一式ダウンロードが使えます。</p>
+  </section>
+
+  <!-- Card 0: Wi-Fi OTA Update Card (For already-running sensor boxes!) -->
+  <section class="card" id="ota-update" style="border:2px solid #22c55e;background:linear-gradient(180deg,#f0fdf4 0%,#ffffff 38%);">
+    <h2><span class="step-tag" style="background:#16a34a;">📶 USB不要・Wi-Fi更新</span> いま動いているセンサー箱を Wi-Fi 経由で最新版（版3.1）にする</h2>
+    <a class="zip-btn" style="background:linear-gradient(135deg,#16a34a,#15803d);box-shadow:0 6px 18px rgba(22,163,74,0.28);" href="./downloads/sensor_tsd10_v3.1.mpy" download="センサー箱_TSD10版3.1.mpy">
+      ⬇️ Wi-Fi更新用ファイル「センサー箱_TSD10版3.1.mpy」をダウンロード（約45KB）
+    </a>
+    <div style="margin-top:0.85rem;font-size:0.9rem;color:#14532d;background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:0.8rem 1rem;">
+      <b>📱 スマホ（iPhone等）または PC からの更新手順（約30秒・フタを閉じたままOK）：</b>
+      <ol style="margin:0.35rem 0 0 0;padding-left:1.3rem;">
+        <li>上の緑ボタンを押して <b><code>センサー箱_TSD10版3.1.mpy</code></b> を保存します。</li>
+        <li>センサー箱の状態ページ（例：<code>http://192.168.1.20/</code>）を開き、一番下の <b>「プログラム更新」</b> をタップします（※版3.0から更新するときだけ、センサーの前1.5m以内に物がない向きにして送るとスムーズです）。</li>
+        <li>保存した <code>センサー箱_TSD10版3.1.mpy</code> を選んで <b>「送る」</b> → <b>「更新を適用」</b> を押すと、約25秒で自動的に <b>版3.1</b> に切り替わります（失敗しても自動で元の版に戻る安全設計です）。</li>
+        <li>更新後、状態ページに新しく増える <b>「Wi-Fi 設定（2つまで登録）」</b> を開くと、<b>② 2つ目の Wi-Fi（お店／自宅）</b> をそのまま追加保存できます！</li>
+      </ol>
+    </div>
   </section>
 
   <!-- Card 1: Browser Direct Web Serial Flasher -->
   <section class="card" id="web-flasher">
-    <h2><span class="step-tag" style="background:#16a34a;">おすすめ・ソフト不要</span> Chrome / Edge から直接 Pico W に一発書き込み＆動作チェック</h2>
+    <h2><span class="step-tag">初回USB書き込み</span> Chrome / Edge から直接 Pico W に一発書き込み＆動作チェック（Wi-Fi 2件対応）</h2>
 
     <div class="note-box" style="margin-bottom:0.9rem;">
       <b>💡 新品の Pico W を箱から出したばかりのときだけ（3秒）：</b><br>
@@ -300,12 +317,20 @@
 
     <div class="form-grid">
       <div class="field">
-        <label for="ssid">① Wi-Fi 名（SSID・2.4GHz）</label>
-        <input id="ssid" type="text" placeholder="例: MyShop_WiFi" autocomplete="off">
+        <label for="ssid">① 1つ目の Wi-Fi 名（SSID・2.4GHz）【必須】</label>
+        <input id="ssid" type="text" placeholder="例: 自宅またはお店の Wi-Fi" autocomplete="off">
       </div>
       <div class="field">
-        <label for="wpass">② Wi-Fi パスワード <label style="font-weight:normal;font-size:0.8rem;margin-left:8px;cursor:pointer;"><input type="checkbox" onchange="document.getElementById('wpass').type=this.checked?'text':'password'"> 表示する</label></label>
-        <input id="wpass" type="password" placeholder="Wi-Fiのパスワード" autocomplete="off">
+        <label for="wpass">① 1つ目の Wi-Fi パスワード <label style="font-weight:normal;font-size:0.8rem;margin-left:8px;cursor:pointer;"><input type="checkbox" onchange="document.getElementById('wpass').type=document.getElementById('wpass2').type=this.checked?'text':'password'"> 表示する</label></label>
+        <input id="wpass" type="password" placeholder="1つ目のパスワード" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="ssid2">② 2つ目の Wi-Fi 名（もう片方の場所・任意）</label>
+        <input id="ssid2" type="text" placeholder="例: お店または自宅（後から画面でも追加可）" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="wpass2">② 2つ目の Wi-Fi パスワード（任意）</label>
+        <input id="wpass2" type="password" placeholder="2つ目のパスワード" autocomplete="off">
       </div>
     </div>
     <div style="font-size:0.79rem;color:var(--muted);margin-bottom:0.85rem;">
@@ -313,7 +338,7 @@
     </div>
 
     <button class="flash-btn" id="btn-flash" onclick="runWebFlash()">
-      🔌 USB接続した Pico W に一発書き込み ＆ 49〜50件/秒 チェック開始
+      🔌 USB接続した Pico W に一発書き込み（版3.1）＆ 動作チェック開始
     </button>
 
     <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.65rem;align-items:center;justify-content:space-between;">
@@ -344,18 +369,25 @@
   <section class="card" id="downloads">
     <h2><span class="step-tag">ZIP一式・個別DL</span> ソフト一式をダウンロードして使う（.bat 自動書き込み ／ Thonny 用）</h2>
 
-    <a class="zip-btn" href="./downloads/TSD10_v3.0_full_set.zip" download="TSD10版_ソフト一式_版3.0.zip">
-      📦 TSD10版 ソフト一式（版3.0）をまとめてダウンロード (.zip / 約0.7MB)
+    <a class="zip-btn" href="./downloads/TSD10_v3.1_full_set.zip" download="TSD10版_ソフト一式_版3.1.zip">
+      📦 TSD10版 ソフト一式（最新版3.1）をまとめてダウンロード (.zip / 約0.7MB)
     </a>
     <div style="font-size:0.83rem;color:var(--muted);margin-top:0.5rem;">
-      ※同梱内容：<code>TSD10_センサー箱に入れる/</code>（<code>app.mpy</code>, <code>main.py</code>, <code>wifi_secret.py</code>ひな形）、<code>PicoWに書き込んで動作チェック.bat</code>、新品Pico W用 <code>.uf2</code>、OTA更新用 <code>.mpy</code>、ソース一式、手順メモ
+      ※同梱内容：<code>TSD10_センサー箱に入れる/</code>（<code>app.mpy</code>, <code>main.py</code>, <code>wifi_secret.py</code> 2件対応ひな形）、<code>PicoWに書き込んで動作チェック.bat</code>、新品Pico W用 <code>.uf2</code>、Wi-Fi更新用 <code>センサー箱_TSD10版3.1.mpy</code>、ソース一式、手順メモ
     </div>
 
     <div class="dl-grid">
+      <a class="dl-item" href="./downloads/sensor_tsd10_v3.1.mpy" download="センサー箱_TSD10版3.1.mpy">
+        <div>
+          <div class="dl-name">センサー箱_TSD10版3.1.mpy</div>
+          <div class="dl-desc">状態ページからの Wi-Fi 経由アップデート（OTA）用ファイル</div>
+        </div>
+        <span class="dl-pill" style="background:#dcfce7;color:#14532d;">Wi-Fi更新</span>
+      </a>
       <a class="dl-item" href="./downloads/app.mpy" download="app.mpy">
         <div>
-          <div class="dl-name">app.mpy（版3.0 本体）</div>
-          <div class="dl-desc">Pico W に入れる本体プログラム（vl53l0x.py は不要）</div>
+          <div class="dl-name">app.mpy（版3.1 本体）</div>
+          <div class="dl-desc">初回USB書き込み用本体（中身は上の版3.1と同じ）</div>
         </div>
         <span class="dl-pill">DL</span>
       </a>
@@ -370,13 +402,6 @@
         <div>
           <div class="dl-name">RPI_PICO_W-v1.24.1.uf2</div>
           <div class="dl-desc">新品の Pico W（RPI-RP2 ドライブ）に入れる MicroPython 本体</div>
-        </div>
-        <span class="dl-pill">DL</span>
-      </a>
-      <a class="dl-item" href="./downloads/sensor_tsd10_v3.0.mpy" download="センサー箱_TSD10版3.0.mpy">
-        <div>
-          <div class="dl-name">センサー箱_TSD10版3.0.mpy</div>
-          <div class="dl-desc">今後のスマホ状態ページからのブラウザ更新（OTA）用</div>
         </div>
         <span class="dl-pill">DL</span>
       </a>
@@ -409,20 +434,24 @@ function pyQuote(s) {
   return '"' + String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\r/g, '').replace(/\n/g, '') + '"';
 }
 
-function makeWifiSecretBytes(ssid, pass) {
-  const txt = '# -*- coding: utf-8 -*-\nWIFI_SSID = ' + pyQuote(ssid) + '\nWIFI_PASS = ' + pyQuote(pass) + '\n';
+function makeWifiSecretBytes(ssid, pass, ssid2 = '', pass2 = '') {
+  const txt = '# -*- coding: utf-8 -*-\n' +
+    'WIFI_SSID = ' + pyQuote(ssid) + '\nWIFI_PASS = ' + pyQuote(pass) + '\n' +
+    'WIFI_SSID2 = ' + pyQuote(ssid2) + '\nWIFI_PASS2 = ' + pyQuote(pass2) + '\n';
   return new TextEncoder().encode(txt);
 }
 
 function downloadWifiSecret() {
   const ssid = document.getElementById('ssid').value.trim();
   const pass = document.getElementById('wpass').value;
+  const ssid2 = document.getElementById('ssid2').value.trim();
+  const pass2 = document.getElementById('wpass2').value;
   if (!ssid) {
-    alert('上の欄に Wi-Fi 名（SSID）を入力してから押してください。');
+    alert('上の欄に ① 1つ目の Wi-Fi 名（SSID）を入力してから押してください。');
     document.getElementById('ssid').focus();
     return;
   }
-  const bytes = makeWifiSecretBytes(ssid, pass);
+  const bytes = makeWifiSecretBytes(ssid, pass, ssid2, ssid2 ? pass2 : '');
   const blob = new Blob([bytes], { type: 'text/x-python;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -546,15 +575,15 @@ function showVerdict(hza, infoA, hzb, infoB, ip) {
   const ngEl = document.getElementById('verdict-ng');
   okEl.style.display = 'none';
   ngEl.style.display = 'none';
-  const okA = (hza >= 45 && hza <= 55);
-  const okB = (hzb >= 45 && hzb <= 55);
+  const okA = (hza >= 35 && hza <= 55);
+  const okB = (hzb >= 35 && hzb <= 55);
   const ipBtn = (ip && ip !== '-') ? `<div style="margin-top:0.65rem;"><a href="http://${ip}/" target="_blank" style="display:inline-block;background:#1d4ed8;color:#fff;text-decoration:none;font-weight:800;padding:0.5rem 1rem;border-radius:8px;">🌐 状態ページ (http://${ip}/) を新しいタブで開く</a></div>` : '';
   if (okA && okB) {
     okEl.style.display = 'block';
     okEl.innerHTML =
       `<div style="font-size:1.12rem;font-weight:800;">🎉 大成功・一発合格！ A・B ともに正常通信しています！</div>` +
       `<div style="margin-top:0.35rem;font-weight:700;">・センサーA（ドア側・7番ピン）：<b>${hza} 件/秒</b> [${infoA}] ✅<br>・センサーB（店内側・17番ピン）：<b>${hzb} 件/秒</b> [${infoB}] ✅</div>` +
-      `<div style="margin-top:0.4rem;font-size:0.9rem;">👉 <b>2.2kΩ の抵抗は切らずにそのまま</b>でOKです！配線を中央に寄せてフタをパチンと閉じて完成です。</div>` +
+      `<div style="margin-top:0.4rem;font-size:0.9rem;">👉 配線を中央に寄せてフタをパチンと閉じて完成です！状態ページの「Wi-Fi 設定」からいつでも2つ目のWi-Fiを追加・変更できます。</div>` +
       ipBtn;
   } else {
     ngEl.style.display = 'block';
@@ -625,8 +654,10 @@ async function requestPicoPort() {
 async function runWebFlash() {
   const ssid = document.getElementById('ssid').value.trim();
   const pass = document.getElementById('wpass').value;
+  const ssid2 = document.getElementById('ssid2').value.trim();
+  const pass2 = document.getElementById('wpass2').value;
   if (!ssid) {
-    alert('先に ① Wi-Fi 名（SSID）を入力してください。');
+    alert('先に ① 1つ目の Wi-Fi 名（SSID）を入力してください。');
     document.getElementById('ssid').focus();
     return;
   }
@@ -647,13 +678,13 @@ async function runWebFlash() {
   logEl.textContent = '';
   let sess = new PicoSerialSession(port);
   try {
-    setProgress(5, '最新ファイル（app.mpy / main.py）を取得しています…');
+    setProgress(5, '最新ファイル（app.mpy 版3.1 / main.py）を取得しています…');
     const [rMain, rApp] = await Promise.all([
       fetch('./downloads/main.py', { cache: 'no-store' }),
       fetch('./downloads/app.mpy', { cache: 'no-store' })
     ]);
     if (!rMain.ok || !rApp.ok) throw new Error('書き込み用ファイルの取得に失敗しました');
-    const u8Wifi = makeWifiSecretBytes(ssid, pass);
+    const u8Wifi = makeWifiSecretBytes(ssid, pass, ssid2, ssid2 ? pass2 : '');
     const u8Main = new Uint8Array(await rMain.arrayBuffer());
     const u8App  = new Uint8Array(await rApp.arrayBuffer());
 
@@ -669,13 +700,13 @@ async function runWebFlash() {
 
     setProgress(18, '1/3: wifi_secret.py を書き込んでいます…');
     await sess.uploadFile('wifi_secret.py', u8Wifi);
-    logMsg('✅ [1/3] wifi_secret.py 書き込み完了（パスワード非表示）');
+    logMsg('✅ [1/3] wifi_secret.py 書き込み完了（パスワード非表示' + (ssid2 ? '・Wi-Fi 2件登録' : '') + '）');
 
     setProgress(25, '2/3: main.py を書き込んでいます…');
     await sess.uploadFile('main.py', u8Main);
     logMsg(`✅ [2/3] main.py 書き込み完了 (${u8Main.length} bytes)`);
 
-    setProgress(32, '3/3: app.mpy（TSD10版 3.0）を書き込んでいます…');
+    setProgress(32, '3/3: app.mpy（TSD10版 3.1）を書き込んでいます…');
     await sess.uploadFile('app.mpy', u8App, (done, tot) => {
       const pct = 32 + Math.round((done / tot) * 52);
       setProgress(pct, `3/3: app.mpy 転送中… ${Math.round(done / tot * 100)}% (${done} / ${tot} bytes)`);

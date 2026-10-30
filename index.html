@@ -869,8 +869,8 @@
 
     <div class="file-box">
       <div class="sidebar-heading" style="margin-bottom:0.2rem;">関連ファイル（どこからでもDL可）</div>
-      <a class="file-btn" href="flash.html" style="background:#f0fdf4;border-color:#86efac;color:#14532d;"><span>🔌 ソフトDL＆ブラウザ書込</span><span>開く</span></a>
-      <a class="file-btn" href="downloads/TSD10_v3.0_full_set.zip" download="TSD10版_ソフト一式_版3.0.zip" style="background:#eff6ff;border-color:#93c5fd;"><span>📦 ソフト一式 ZIP（版3.0）</span><span>DL</span></a>
+      <a class="file-btn" href="flash.html" style="background:#f0fdf4;border-color:#86efac;color:#14532d;"><span>🔌 Wi-Fi更新・ソフトDL・書込</span><span>開く</span></a>
+      <a class="file-btn" href="downloads/TSD10_v3.1_full_set.zip" download="TSD10版_ソフト一式_版3.1.zip" style="background:#eff6ff;border-color:#93c5fd;"><span>📦 ソフト一式 ZIP（版3.1）</span><span>DL</span></a>
       <a class="file-btn" href="tsd10_body_print.stl" download="センサー箱TSD10版_本体_印刷向き.stl"><span>📦 本体 STL（印刷向き）</span><span>DL</span></a>
       <a class="file-btn" href="tsd10_lid_print.stl" download="センサー箱TSD10版_ふた_印刷向き.stl"><span>📦 ふた STL（印刷向き）</span><span>DL</span></a>
       <a class="file-btn" href="manual_a4.pdf" target="_blank"><span>🖨️ A4印刷用 PDF（6頁）</span><span>開く</span></a>
@@ -1641,12 +1641,12 @@
 
       <div class="alert alert-ok" style="margin-top:0; margin-bottom:1rem; display:flex; align-items:center; justify-content:space-between; gap:0.8rem; flex-wrap:wrap;">
         <div>
-          <b>💾 本体プログラム（TSD10版・版3.0）の書き込みがまだの方はこちら：</b><br>
-          別のパソコンからでも <b>ZIP一式ダウンロード</b> または <b>Chrome / Edge からソフト不要で直接 USB 書き込み＆49〜50件/秒診断</b> ができます。
+          <b>💾 本体プログラム（TSD10版・最新版3.1：Wi-Fi経由アップデート＆Wi-Fi 2件登録対応）はこちら：</b><br>
+          稼働中の箱はスマホ・PCから <b>Wi-Fi 経由で `.mpy` 更新</b> ができ、初回の箱も <b>Chrome / Edge から直接 USB 書き込み（Wi-Fi 2件同時登録可）</b> または <b>ZIP一式ダウンロード</b> が使えます。
         </div>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <a href="flash.html" style="background:#16a34a;color:#fff;text-decoration:none;font-weight:800;font-size:0.85rem;padding:0.5rem 0.95rem;border-radius:8px;white-space:nowrap;">🔌 書き込み＆ソフトDLページを開く</a>
-          <a href="downloads/TSD10_v3.0_full_set.zip" download="TSD10版_ソフト一式_版3.0.zip" style="background:#2563eb;color:#fff;text-decoration:none;font-weight:800;font-size:0.85rem;padding:0.5rem 0.95rem;border-radius:8px;white-space:nowrap;">📦 ソフト一式 (.zip) DL</a>
+          <a href="flash.html" style="background:#16a34a;color:#fff;text-decoration:none;font-weight:800;font-size:0.85rem;padding:0.5rem 0.95rem;border-radius:8px;white-space:nowrap;">🔌 Wi-Fi更新＆書き込みページを開く</a>
+          <a href="downloads/TSD10_v3.1_full_set.zip" download="TSD10版_ソフト一式_版3.1.zip" style="background:#2563eb;color:#fff;text-decoration:none;font-weight:800;font-size:0.85rem;padding:0.5rem 0.95rem;border-radius:8px;white-space:nowrap;">📦 ソフト一式 (.zip) DL</a>
         </div>
       </div>
 
@@ -1659,8 +1659,8 @@
           <ol style="margin:0; padding-left:1.3rem; font-size:0.92rem;">
             <li><b>閉める前に USB を挿して状態ページ（Pico W 自身の判定）を見る：</b>
               <ul>
-                <li><b><code>49〜50 件/秒</code> が出る</b> ➔ そのまま完成！抵抗2本とも残したまま USB を抜いて次へ。</li>
-                <li><b><code>0 件/秒</code> のまま</b> ➔ 3.3V信号のため分圧解除します。<b>黒線の結び目より上で <code>2.2kΩ</code>（2本）だけをニッパーで切り落とし</b>（<code>1kΩ</code> と黒線はそのまま穴に残します！）、<code>49〜50 件/秒</code> が出ることを確認します。</li>
+                <li><b><code>40〜50 件/秒</code>（実機目安 <code>42 件/秒</code>）が出る</b> ➔ そのままでも通信OKですが、3.3V出力ロットでは余裕を増やすため <code>2.2kΩ</code> を切っておくとより確実です（<code>1kΩ</code> は必ず残します）。</li>
+                <li><b><code>0 件/秒</code> のまま</b> ➔ 3.3V信号が分圧で下がりすぎています。<b>黒線の結び目より上で <code>2.2kΩ</code>（2本）だけをニッパーで切り落とし</b>（<code>1kΩ</code> と黒線はそのまま穴に残します！）、<code>40〜50 件/秒</code> が出ることを確認します。</li>
               </ul>
             </li>
             <li><b>配線と抵抗を中央（6〜7mm 空間）へ寝かせてたたむ：</b>左端の上下角（押さえブロック2か所）・右端 micro-USB 真上（USB押さえ柱）・上下のツメ溝4か所に線を挟まないよう中央へ寄せます。</li>
@@ -1728,7 +1728,7 @@
         <tbody>
           <tr>
             <td><label class="check-item" style="padding:0;"><input type="checkbox"><b>1秒あたりの正常測定数</b></label></td>
-            <td>A・B ともに <b>49〜50 件/秒</b>、失敗 <b>0回</b></td>
+            <td>A・B ともに <b>40〜50 件/秒</b>（実機約42件/秒）、失敗 <b>0回</b></td>
             <td>0件のまま → ① <code>2.2kΩ</code> をまだ切っていなければニッパーで切る、② GP5 / GP13 のピン位置や <code>trgv</code> 向きを再確認。</td>
           </tr>
           <tr>
