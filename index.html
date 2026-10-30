@@ -952,7 +952,7 @@
           </div>
           <div style="font-size:0.86rem; color:#334155;">
             <b>PONO TSD10</b>（12×7.5×9.1mm / 視野角 3° / 460800bps / 50Hz）。<br>
-            付属の 4ピン（1.25mmピッチ・10cm）ケーブルを <b>約60mm に切って</b> Pico W へ直接はんだ付けします。
+            付属の 4ピン（1.25mmピッチ・10cm）ケーブルを <b>約50mm に切って</b> 抵抗の硬い足経由でカンタンに挿せます。
           </div>
         </div>
 
@@ -1022,7 +1022,7 @@
             </tr>
             <tr>
               <td><b>はんだごて・はんだ・ニッパー</b></td>
-              <td>付属ケーブルを 60mm にカット・被覆むき（2〜3mm）・抵抗と Pico W のはんだ付けに使用（<b>テスターは不要</b>です）。</td>
+              <td>付属ケーブルを約 50mm にカット・被覆むき（2〜3mm）・抵抗2本の「2本足プラグ」作成とはんだ付けに使用（<b>テスターは不要</b>です）。</td>
             </tr>
             <tr>
               <td><b>絶縁テープ または 熱収縮チューブ</b></td>
@@ -1114,50 +1114,150 @@
         <text x="195" y="269" font-size="9.6" font-weight="800" fill="#15803d">t (1番)：TX（緑線）→ 1kΩ経由</text>
         <text x="178" y="288" font-size="8.3" fill="#475569">※黄線(r)は短く切って先端を絶縁します</text>
 
+        <!-- Right panel: Easy 2-Leg Plug Harness Method + 10s Status Check & Cut Diagram -->
         <rect x="388" y="8" width="364" height="299" rx="6" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="398" y="27" font-size="12.2" font-weight="800" fill="#1e3a8a">② テスター不要！ケーブル加工と抵抗の安全な使い方</text>
+        <text x="398" y="26" font-size="11.6" font-weight="800" fill="#1e3a8a">② 一番カンタン！机の上で「2本足プラグ」を作って挿す方法</text>
 
-        <rect x="398" y="38" width="344" height="114" rx="5" fill="#fff7ed" stroke="#fdba74"/>
-        <text x="408" y="55" font-size="10.6" font-weight="800" fill="#9a3412">下ごしらえ（A・B の2本とも同じように加工）</text>
-        <text x="408" y="72" font-size="8.9" fill="#431407">1. 付属10cm線を <tspan font-weight="800">コネクタから約60mm</tspan> で切る（黄線は短く切って絶縁）</text>
-        <text x="408" y="88" font-size="8.9" fill="#431407">2. <tspan font-weight="800">緑線(t)の先に 1kΩ（茶・黒・赤・金）</tspan>をはんだ付けし、裸の足を絶縁</text>
-        <rect x="408" y="97" width="324" height="47" rx="4" fill="#ffffff" stroke="#fed7aa"/>
-        <rect x="416" y="109" width="36" height="24" rx="3" fill="#e2e8f0" stroke="#64748b"/>
-        <text x="434" y="124" text-anchor="middle" font-size="8.2" font-weight="800" fill="#334155">コネクタ</text>
-        <line x1="452" y1="113" x2="555" y2="113" stroke="#dc2626" stroke-width="2.4"/>
-        <text x="562" y="116" font-size="8.3" font-weight="800" fill="#dc2626">赤(5V) → 40番 VBUS</text>
-        <line x1="452" y1="121" x2="555" y2="121" stroke="#0f172a" stroke-width="2.4"/>
-        <text x="562" y="124" font-size="8.3" font-weight="800" fill="#0f172a">黒(GND) → 8番 / 18番</text>
-        <line x1="452" y1="130" x2="515" y2="130" stroke="#16a34a" stroke-width="2.4"/>
-        <rect x="515" y="124" width="38" height="12" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.4"/>
-        <text x="534" y="133" text-anchor="middle" font-size="8" font-weight="800" fill="#78350f">1kΩ</text>
-        <line x1="553" y1="130" x2="574" y2="130" stroke="#64748b" stroke-width="2.2"/>
-        <text x="580" y="133" font-size="8.3" font-weight="800" fill="#15803d">→ 7番 GP5 / 17番 GP13</text>
+        <rect x="396" y="34" width="348" height="146" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+        <text x="405" y="49" font-size="8.8" font-weight="800" fill="#9a3412">机の上の下ごしらえ（A・B 2組つくる ／ 付属線はコネクタから約50mmに切る）</text>
 
-        <rect x="398" y="160" width="344" height="138" rx="5" fill="#f0f9ff" stroke="#7dd3fc"/>
-        <text x="408" y="178" font-size="10.4" font-weight="800" fill="#075985">最初は「1kΩ＋隣のGND穴へ 2.2kΩ 橋渡し」を両方つける！</text>
-        <text x="408" y="195" font-size="8.5" fill="#0c4a6e">両方つければ信号が5Vでも約3.4Vに下がり、<tspan font-weight="800">Pico W を壊す心配がゼロ</tspan>です。</text>
-        <text x="408" y="209" font-size="8.5" fill="#0c4a6e">ふたを閉める前に USB を挿し、<tspan font-weight="800">状態ページ（Pico W 自身が判定！）</tspan>を見ます：</text>
+        <!-- Sub-panel 1: Twist 1k and 2.2k into 2-leg plug -->
+        <rect x="404" y="55" width="160" height="119" rx="4" fill="#ffffff" stroke="#fed7aa"/>
+        <text x="484" y="69" text-anchor="middle" font-size="8.6" font-weight="800" fill="#9a3412">手順1：抵抗2本をねじって二股に</text>
+        <line x1="444" y1="75" x2="444" y2="87" stroke="#64748b" stroke-width="2.2"/>
+        <rect x="437" y="87" width="14" height="28" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.4"/>
+        <line x1="438" y1="93"  x2="450" y2="93"  stroke="#78350f" stroke-width="2"/>
+        <line x1="438" y1="98"  x2="450" y2="98"  stroke="#0f172a" stroke-width="2"/>
+        <line x1="438" y1="103" x2="450" y2="103" stroke="#dc2626" stroke-width="2"/>
+        <text x="429" y="104" text-anchor="end" font-size="8.0" font-weight="800" fill="#78350f">1kΩ</text>
+        <line x1="444" y1="115" x2="444" y2="157" stroke="#64748b" stroke-width="2.4"/>
+        <circle cx="444" cy="124" r="3.6" fill="#94a3b8" stroke="#334155" stroke-width="1.2"/>
+        <line x1="444" y1="124" x2="474" y2="124" stroke="#64748b" stroke-width="2.2"/>
+        <rect x="474" y="117" width="32" height="14" rx="3" fill="#fed7aa" stroke="#c2410c" stroke-width="1.4"/>
+        <text x="490" y="127" text-anchor="middle" font-size="7.8" font-weight="800" fill="#7c2d12">2.2kΩ</text>
+        <path d="M 506 124 L 520 124 L 520 157" fill="none" stroke="#64748b" stroke-width="2.4" stroke-linejoin="round"/>
+        <text x="490" y="109" text-anchor="middle" font-size="7.3" font-weight="700" fill="#b45309">2回巻いてはんだ</text>
+        <line x1="464" y1="111" x2="448" y2="121" stroke="#b45309" stroke-width="1.1"/>
+        <line x1="444" y1="152" x2="520" y2="152" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="2,2"/>
+        <text x="482" y="168" text-anchor="middle" font-size="7.6" font-weight="800" fill="#0369a1">隣の穴幅(2.5mm)の硬い2本足！</text>
 
-        <rect x="408" y="220" width="158" height="68" rx="4" fill="#dcfce7" stroke="#22c55e"/>
-        <text x="487" y="237" text-anchor="middle" font-size="9.6" font-weight="800" fill="#14532d">49〜50 件/秒 が出たとき</text>
-        <text x="487" y="254" text-anchor="middle" font-size="9.2" font-weight="800" fill="#15803d">そのまま完成！</text>
-        <text x="487" y="269" text-anchor="middle" font-size="8.0" fill="#166534">抵抗2本とも残したまま</text>
-        <text x="487" y="281" text-anchor="middle" font-size="8.0" fill="#166534">ふたを閉めてOKです</text>
+        <!-- Sub-panel 2: Solder Green & Black wires + Tape insulation -->
+        <rect x="570" y="55" width="168" height="119" rx="4" fill="#ffffff" stroke="#fed7aa"/>
+        <text x="654" y="69" text-anchor="middle" font-size="8.6" font-weight="800" fill="#9a3412">手順2：緑・黒線を付け穴へ挿す</text>
+        <rect x="602" y="76" width="28" height="42" rx="3" fill="rgba(56,189,248,0.16)" stroke="#0284c7" stroke-width="1.2" stroke-dasharray="3,2"/>
+        <text x="633" y="87" font-size="7.1" font-weight="800" fill="#0369a1">テープ絶縁</text>
+        <path d="M 576 81 L 616 81" fill="none" stroke="#16a34a" stroke-width="2.6"/>
+        <text x="577" y="77" font-size="7.4" font-weight="800" fill="#15803d">緑(t)</text>
+        <circle cx="616" cy="81" r="3.0" fill="#94a3b8" stroke="#334155"/>
+        <line x1="616" y1="81" x2="616" y2="88" stroke="#64748b" stroke-width="2.2"/>
+        <rect x="609" y="88" width="14" height="26" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.3"/>
+        <text x="616" y="104" text-anchor="middle" font-size="7.2" font-weight="800" fill="#78350f">1k</text>
+        <line x1="616" y1="114" x2="616" y2="156" stroke="#64748b" stroke-width="2.4"/>
+        <circle cx="616" cy="123" r="3.2" fill="#94a3b8" stroke="#334155"/>
+        <line x1="616" y1="123" x2="642" y2="123" stroke="#64748b" stroke-width="2.2"/>
+        <rect x="642" y="117" width="30" height="12" rx="3" fill="#fed7aa" stroke="#c2410c" stroke-width="1.3"/>
+        <text x="657" y="126" text-anchor="middle" font-size="7.3" font-weight="800" fill="#7c2d12">2.2k</text>
+        <path d="M 672 123 L 686 123 L 686 156" fill="none" stroke="#64748b" stroke-width="2.4" stroke-linejoin="round"/>
+        <path d="M 732 141 L 686 141" fill="none" stroke="#0f172a" stroke-width="2.6"/>
+        <circle cx="686" cy="141" r="3.2" fill="#94a3b8" stroke="#0f172a"/>
+        <text x="731" y="137" text-anchor="end" font-size="7.4" font-weight="800" fill="#0f172a">黒(g)</text>
+        <circle cx="616" cy="159" r="3.8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/>
+        <circle cx="686" cy="159" r="3.8" fill="#e2e8f0" stroke="#0f172a" stroke-width="1.8"/>
+        <text x="616" y="170" text-anchor="middle" font-size="7.4" font-weight="800" fill="#15803d">7番(B:17)</text>
+        <text x="686" y="170" text-anchor="middle" font-size="7.4" font-weight="800" fill="#0f172a">8番(B:18)</text>
 
-        <rect x="574" y="220" width="158" height="68" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
-        <text x="653" y="237" text-anchor="middle" font-size="9.6" font-weight="800" fill="#78350f">0 件/秒 のままのとき</text>
-        <text x="653" y="254" text-anchor="middle" font-size="9.0" font-weight="800" fill="#b45309">2.2kΩ だけニッパーで切る</text>
-        <text x="653" y="269" text-anchor="middle" font-size="8.0" fill="#92400e">（3.3V信号のため分圧解除。</text>
-        <text x="653" y="281" text-anchor="middle" font-size="8.0" fill="#92400e">緑線の 1kΩ は残したままOK！）</text>
+        <!-- Lower Blue Box: Pre-Close Status Page Check (Keep vs Snip 2.2k Diagram!) -->
+        <rect x="396" y="186" width="348" height="113" rx="5" fill="#f0f9ff" stroke="#7dd3fc"/>
+        <text x="405" y="201" font-size="9.5" font-weight="800" fill="#075985">手順3：閉める前にUSBを挿して「状態ページ」を見る（両方とも図で確認！）</text>
+
+        <rect x="404" y="207" width="154" height="86" rx="4" fill="#dcfce7" stroke="#22c55e"/>
+        <text x="481" y="221" text-anchor="middle" font-size="8.8" font-weight="800" fill="#14532d">① 49〜50 件/秒 が出たとき</text>
+        <text x="481" y="235" text-anchor="middle" font-size="8.6" font-weight="800" fill="#15803d">そのまま完成！（切らない）</text>
+        <line x1="452" y1="243" x2="452" y2="278" stroke="#16a34a" stroke-width="2.2"/>
+        <rect x="445" y="245" width="14" height="12" rx="2" fill="#fde68a" stroke="#b45309"/>
+        <text x="452" y="254" text-anchor="middle" font-size="6.8" font-weight="800" fill="#78350f">1k</text>
+        <line x1="452" y1="263" x2="508" y2="263" stroke="#b45309" stroke-width="2"/>
+        <rect x="468" y="258" width="24" height="10" rx="2" fill="#fed7aa" stroke="#c2410c"/>
+        <text x="480" y="266" text-anchor="middle" font-size="6.5" font-weight="800" fill="#7c2d12">2.2k</text>
+        <line x1="508" y1="263" x2="508" y2="278" stroke="#64748b" stroke-width="2.2"/>
+        <line x1="526" y1="271" x2="508" y2="271" stroke="#0f172a" stroke-width="2.2"/>
+        <circle cx="508" cy="271" r="2.5" fill="#0f172a"/>
+        <text x="481" y="289" text-anchor="middle" font-size="7.3" font-weight="700" fill="#166534">2本とも残してふたを閉める</text>
+
+        <rect x="564" y="207" width="174" height="86" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+        <text x="651" y="221" text-anchor="middle" font-size="8.8" font-weight="800" fill="#78350f">② 0 件/秒 のままのとき</text>
+        <text x="651" y="235" text-anchor="middle" font-size="8.3" font-weight="800" fill="#b91c1c">黒線より上(×印)で2.2kΩだけ切る</text>
+        <line x1="612" y1="243" x2="612" y2="278" stroke="#16a34a" stroke-width="2.2"/>
+        <rect x="605" y="245" width="14" height="12" rx="2" fill="#fde68a" stroke="#b45309"/>
+        <text x="612" y="254" text-anchor="middle" font-size="6.8" font-weight="800" fill="#78350f">1k</text>
+        <rect x="631" y="257" width="26" height="10" rx="2" fill="#fef9c3" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="2,2"/>
+        <text x="644" y="265" text-anchor="middle" font-size="6.5" font-weight="800" fill="#dc2626">撤去</text>
+        <text x="622" y="266" text-anchor="middle" font-size="8.5" font-weight="800" fill="#dc2626">×</text>
+        <text x="666" y="266" text-anchor="middle" font-size="8.5" font-weight="800" fill="#dc2626">×</text>
+        <line x1="674" y1="269" x2="674" y2="278" stroke="#0f172a" stroke-width="2.4"/>
+        <line x1="700" y1="271" x2="674" y2="271" stroke="#0f172a" stroke-width="2.4"/>
+        <circle cx="674" cy="271" r="2.8" fill="#0f172a"/>
+        <text x="703" y="274" font-size="6.8" font-weight="800" fill="#0f172a">黒は残る!</text>
+        <text x="651" y="289" text-anchor="middle" font-size="7.2" font-weight="700" fill="#92400e">1kΩと黒線はそのまま穴に残る！</text>
       </svg>
+
+      <!-- Alternative Method B Accordion (Mid-cable H-Bridge Visual Diagram!) -->
+      <details style="margin-top:0.65rem; background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:0.55rem 0.9rem;">
+        <summary style="cursor:pointer; font-weight:800; font-size:0.86rem; color:#1e3a8a;">
+          💡 別案（方法B）：「線の途中で H型 に橋渡しする方法」の図解も見る（電気的には同じです）
+        </summary>
+        <div style="margin-top:0.6rem;">
+          <svg viewBox="0 0 720 185" style="width:100%; height:auto; background:#ffffff; border:1px solid #cbd5e1; border-radius:8px;">
+            <text x="16" y="22" font-size="11.5" font-weight="800" fill="#1e3a8a">【方法B：線の途中でH型に橋渡し】 1kΩ の後ろ（Pico側）と黒線の被覆むき箇所の間に 2.2kΩ を渡す</text>
+            <rect x="18" y="42" width="64" height="98" rx="5" fill="#e2e8f0" stroke="#64748b" stroke-width="1.6"/>
+            <text x="50" y="88" text-anchor="middle" font-size="10.5" font-weight="800" fill="#1e293b">TSD10</text>
+            <text x="50" y="103" text-anchor="middle" font-size="9" fill="#475569">コネクタ</text>
+            <line x1="82" y1="54" x2="365" y2="54" stroke="#dc2626" stroke-width="2.8"/>
+            <text x="92" y="49" font-size="9.5" font-weight="800" fill="#dc2626">赤(v:5V) → 40番 VBUS</text>
+            <line x1="82" y1="74" x2="140" y2="74" stroke="#eab308" stroke-width="2.6"/>
+            <rect x="140" y="69" width="12" height="10" rx="2" fill="#334155"/>
+            <text x="158" y="78" font-size="9" font-weight="700" fill="#854d0e">黄(r) 切って絶縁</text>
+            <line x1="82" y1="100" x2="180" y2="100" stroke="#16a34a" stroke-width="3"/>
+            <text x="92" y="95" font-size="9.5" font-weight="800" fill="#15803d">緑(t:TX)</text>
+            <rect x="180" y="91" width="50" height="18" rx="3" fill="#fde68a" stroke="#b45309" stroke-width="1.6"/>
+            <text x="205" y="104" text-anchor="middle" font-size="10.5" font-weight="800" fill="#78350f">1kΩ</text>
+            <line x1="230" y1="100" x2="365" y2="100" stroke="#64748b" stroke-width="2.8"/>
+            <circle cx="370" cy="100" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+            <text x="380" y="104" font-size="10" font-weight="800" fill="#15803d">7番 GP5(B:17)</text>
+            <line x1="82" y1="152" x2="365" y2="152" stroke="#0f172a" stroke-width="3"/>
+            <text x="92" y="147" font-size="9.5" font-weight="800" fill="#0f172a">黒(g:GND)</text>
+            <circle cx="370" cy="152" r="5" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+            <text x="380" y="156" font-size="10" font-weight="800" fill="#0f172a">8番 GND(B:18)</text>
+            <circle cx="295" cy="100" r="4" fill="#94a3b8" stroke="#1e293b"/>
+            <circle cx="295" cy="152" r="4" fill="#94a3b8" stroke="#0f172a"/>
+            <line x1="295" y1="100" x2="295" y2="112" stroke="#64748b" stroke-width="2.6"/>
+            <rect x="286" y="112" width="18" height="28" rx="3" fill="#fed7aa" stroke="#c2410c" stroke-width="1.6"/>
+            <text x="309" y="130" font-size="10" font-weight="800" fill="#9a3412">2.2kΩ</text>
+            <line x1="295" y1="140" x2="295" y2="152" stroke="#64748b" stroke-width="2.6"/>
+
+            <!-- Right note inside Method B SVG: 0/s cut point -->
+            <rect x="478" y="38" width="228" height="132" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+            <text x="592" y="57" text-anchor="middle" font-size="10.5" font-weight="800" fill="#78350f">方法Bで「0件/秒」だったとき</text>
+            <line x1="504" y1="84" x2="676" y2="84" stroke="#16a34a" stroke-width="2.8"/>
+            <rect x="532" y="76" width="36" height="16" rx="3" fill="#fde68a" stroke="#b45309"/>
+            <text x="550" y="88" text-anchor="middle" font-size="9.5" font-weight="800" fill="#78350f">1kΩ</text>
+            <line x1="504" y1="128" x2="676" y2="128" stroke="#0f172a" stroke-width="2.8"/>
+            <rect x="598" y="98" width="32" height="16" rx="3" fill="#fef9c3" stroke="#dc2626" stroke-dasharray="3,2"/>
+            <text x="614" y="110" text-anchor="middle" font-size="9" font-weight="800" fill="#dc2626">撤去</text>
+            <text x="614" y="96" text-anchor="middle" font-size="11" font-weight="800" fill="#dc2626">×</text>
+            <text x="614" y="126" text-anchor="middle" font-size="11" font-weight="800" fill="#dc2626">×</text>
+            <text x="592" y="150" text-anchor="middle" font-size="9.5" font-weight="800" fill="#b91c1c">橋渡しの 2.2kΩ だけ切る！</text>
+            <text x="592" y="163" text-anchor="middle" font-size="8.8" fill="#92400e">（緑線の1kΩと黒線はそのまま残る）</text>
+          </svg>
+        </div>
+      </details>
 
       <!-- Interactive Resistor State Preview Switcher linked to STEP 4 -->
       <div class="filter-bar" style="justify-content:space-between; margin-top:0.8rem; margin-bottom:0;">
         <span style="font-weight:800; font-size:0.86rem; color:#1e3a8a;">🔧 STEP 4 の配線図で「組み立て時」と「0件/秒だったときのカット箇所」を見比べる：</span>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-          <button class="filter-btn active" id="logic-std" onclick="setLogicLevel('std')">🔧 ① 組み立て時（標準：1kΩ＋2.2kΩ 両方つける）</button>
-          <button class="filter-btn" id="logic-cut" onclick="setLogicLevel('cut')">✂️ ② もし「0件/秒」だったら（2.2kΩ だけ切った状態）</button>
+          <button class="filter-btn active" id="logic-std" onclick="setLogicLevel('std')">🔧 ① 組み立て時（標準：2本足プラグで両方つける）</button>
+          <button class="filter-btn" id="logic-cut" onclick="setLogicLevel('cut')">✂️ ② もし「0件/秒」だったら（黒線より上で 2.2kΩ だけ切る）</button>
         </div>
       </div>
     </section>
@@ -1167,7 +1267,7 @@
       <div class="sec-header">
         <div class="sec-title-group">
           <span class="sec-badge">STEP 4</span>
-          <h2 class="sec-title">実写ピン位置マップ ＆ はんだ付け（1kΩ直列＋隣の穴へ2.2kΩ橋渡し）</h2>
+          <h2 class="sec-title">実写ピン位置マップ ＆ はんだ付け（2本足プラグ方式で1穴1本挿し）</h2>
         </div>
         <label class="done-toggle"><input type="checkbox" class="step-check" data-id="step-4"><span>はんだ付け完了</span></label>
       </div>
@@ -1183,12 +1283,12 @@
       </div>
 
       <div id="divider-banner" class="alert alert-warn" style="display:none;">
-        <b>✂️ 「0件/秒」時のニッパーカット表示中：</b> ふたを閉める前の通電チェック（STEP 7）で <code>0件/秒</code> だった場合のみ、隣のGND穴へ橋渡しした <b><code>2.2kΩ</code>（点線になった2か所）の両足だけをニッパーで切り落とします</b>。緑線に入れた <b><code>1kΩ</code> は保護抵抗としてそのまま残してOK</b>です！
+        <b>✂️ 「0件/秒」時のニッパーカット表示中：</b> ふたを閉める前の通電チェック（STEP 7）で <code>0件/秒</code> だった場合のみ、<b>黒線の結び目より上（右下の拡大図の <code>×</code> 印2か所）で <code>2.2kΩ</code> 本体だけをニッパーで切り落とします</b>。<code>1kΩ</code> と黒線（GND）はそのまま穴に残るのではんだ付けのやり直しは不要です！
       </div>
 
       <svg id="wiring-svg" viewBox="0 0 780 490" style="width:100%; height:auto; border:1.5px solid #94a3b8; border-radius:12px; background:#ffffff;">
         <rect x="0" y="0" width="780" height="32" fill="#f1f5f9"/>
-        <text x="16" y="21" font-size="11.4" font-weight="800" fill="#0f172a">【箱に載せる向き（部品面が上・micro-USBが右）】 緑線に 1kΩ を入れ、隣のGND穴との間に 2.2kΩ を橋渡しする</text>
+        <text x="16" y="21" font-size="11.2" font-weight="800" fill="#0f172a">【箱に載せる向き（部品面が上・micro-USBが右）】 机で作った「2本足プラグ（1kΩ＋2.2kΩ）」を隣の穴へ1本ずつ挿す</text>
 
         <!-- Sensor A Card -->
         <g class="wire-grp grp-a grp-pwr">
@@ -1383,27 +1483,38 @@
         <text x="720" y="250" text-anchor="middle" font-size="7.8" font-weight="800" fill="#dc2626">※配線は表側から！</text>
 
         <rect id="svg-divider-box" x="670" y="262" width="100" height="184" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5"/>
-        <text x="720" y="277" text-anchor="middle" font-size="8.4" font-weight="800" fill="#92400e">隣の穴へ橋渡し拡大</text>
-        <text x="720" y="289" text-anchor="middle" font-size="7.4" fill="#78350f">(7↔8番 / 17↔18番)</text>
-        <text x="679" y="304" font-size="7.5" font-weight="700" fill="#15803d">緑線(t)</text>
-        <line x1="682" y1="312" x2="752" y2="312" stroke="#16a34a" stroke-width="2.3"/>
-        <rect x="700" y="306" width="28" height="12" rx="2" fill="#fde68a" stroke="#b45309"/>
-        <text x="714" y="315" text-anchor="middle" font-size="7.5" font-weight="800" fill="#78350f">1kΩ</text>
-        <line x1="752" y1="312" x2="752" y2="396" stroke="#16a34a" stroke-width="2.3"/>
+        <text x="720" y="276" text-anchor="middle" font-size="8.2" font-weight="800" fill="#92400e">2本足プラグ拡大図</text>
+        <text x="720" y="287" text-anchor="middle" font-size="7.1" fill="#78350f">(1穴に硬い足1本ずつ!)</text>
+        <!-- Green wire into top of vertical 1k -->
+        <text x="676" y="300" font-size="7.3" font-weight="800" fill="#15803d">緑(t)</text>
+        <line x1="696" y1="297" x2="748" y2="297" stroke="#16a34a" stroke-width="2.4"/>
+        <circle cx="748" cy="297" r="2.7" fill="#94a3b8" stroke="#334155"/>
+        <line x1="748" y1="297" x2="748" y2="304" stroke="#64748b" stroke-width="2.3"/>
+        <rect x="741" y="304" width="14" height="24" rx="2.5" fill="#fde68a" stroke="#b45309" stroke-width="1.3"/>
+        <text x="748" y="319" text-anchor="middle" font-size="7.1" font-weight="800" fill="#78350f">1k</text>
+        <!-- Straight hard leg 1 into Pin 7 / 17 -->
+        <line x1="748" y1="328" x2="748" y2="396" stroke="#64748b" stroke-width="2.5"/>
+        <circle cx="748" cy="340" r="2.9" fill="#94a3b8" stroke="#334155"/>
+        <!-- 2.2k branch ABOVE black wire joint (fades when cut-2k2 is active!) -->
         <g class="bridge-2k2">
-          <path d="M 695 396 L 695 352 L 752 352" fill="none" stroke="#b45309" stroke-width="2.1"/>
-          <rect x="708" y="346" width="30" height="12" rx="2" fill="#fed7aa" stroke="#c2410c"/>
-          <text x="723" y="355" text-anchor="middle" font-size="7.4" font-weight="800" fill="#7c2d12">2.2k</text>
+          <path d="M 748 340 L 695 340 L 695 362" fill="none" stroke="#64748b" stroke-width="2.4" stroke-linejoin="round"/>
+          <rect x="706" y="334" width="29" height="12" rx="2.5" fill="#fed7aa" stroke="#c2410c" stroke-width="1.3"/>
+          <text x="720.5" y="343" text-anchor="middle" font-size="7.2" font-weight="800" fill="#7c2d12">2.2k</text>
         </g>
-        <text class="cut-only-label" x="723" y="355" text-anchor="middle" font-size="8.2" font-weight="800" fill="#dc2626">✂️ 切る</text>
-        <line x1="695" y1="330" x2="695" y2="396" stroke="#0f172a" stroke-width="2.3"/>
-        <text x="678" y="328" font-size="7.4" font-weight="700" fill="#0f172a">黒(g)</text>
+        <text x="701" y="354" text-anchor="middle" font-size="7.8" font-weight="800" fill="#dc2626">×</text>
+        <text x="740" y="354" text-anchor="middle" font-size="7.8" font-weight="800" fill="#dc2626">×</text>
+        <text class="cut-only-label" x="721" y="343" text-anchor="middle" font-size="7.8" font-weight="800" fill="#dc2626">撤去</text>
+        <!-- Lower leg stub + Black wire BELOW 2.2k (stays 100% solid into hole 8/18 even when 2.2k is cut!) -->
+        <line x1="695" y1="362" x2="695" y2="396" stroke="#64748b" stroke-width="2.5"/>
+        <line x1="676" y1="370" x2="695" y2="370" stroke="#0f172a" stroke-width="2.5"/>
+        <circle cx="695" cy="370" r="2.9" fill="#0f172a"/>
+        <text x="676" y="365" font-size="7.2" font-weight="800" fill="#0f172a">黒(g)</text>
         <circle cx="695" cy="400" r="5" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
-        <circle cx="752" cy="400" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+        <circle cx="748" cy="400" r="5" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
         <text x="695" y="415" text-anchor="middle" font-size="7.6" font-weight="800" fill="#0f172a">8/18</text>
-        <text x="752" y="415" text-anchor="middle" font-size="7.6" font-weight="800" fill="#15803d">7/17</text>
-        <text x="720" y="428" text-anchor="middle" font-size="7.2" font-weight="700" fill="#b45309">2〜3mm浮かせて付ける</text>
-        <text x="720" y="439" text-anchor="middle" font-size="7.0" fill="#92400e">(0件なら2.2kだけ切る)</text>
+        <text x="748" y="415" text-anchor="middle" font-size="7.6" font-weight="800" fill="#15803d">7/17</text>
+        <text x="720" y="428" text-anchor="middle" font-size="7.0" font-weight="800" fill="#b91c1c">×＝0件時の切る位置</text>
+        <text x="720" y="439" text-anchor="middle" font-size="6.8" fill="#78350f">(黒線は穴に残るので安心)</text>
       </svg>
 
       <div class="split-2" style="margin-top:1rem; align-items:stretch;">
@@ -1412,7 +1523,7 @@
             <tr>
               <th>センサー</th>
               <th>基板文字（標準色）</th>
-              <th>Pico W 接続先（抵抗の入れ方）</th>
+              <th>Pico W 接続先（2本足プラグ）</th>
               <th>位置（表・USB右）</th>
             </tr>
           </thead>
@@ -1420,41 +1531,41 @@
             <tr>
               <td><b>🟣 A（ドア側）</b></td>
               <td><b><code>t</code></b> TX（<span style="color:#15803d;font-weight:800;">緑</span>）</td>
-              <td><b><code>1kΩ</code></b> を挟んで <b>7番 <code>GP5</code></b></td>
+              <td><code>1kΩ</code> 側の硬い足 → <b>7番 <code>GP5</code></b></td>
               <td>上列・右から <b>7番目</b></td>
             </tr>
             <tr>
               <td><b>🟣 A（ドア側）</b></td>
               <td><b><code>g</code></b> GND（<b>黒</b>）</td>
-              <td><b>8番 <code>GND</code></b>（<b>7↔8番に <code>2.2kΩ</code> 橋渡し</b>）</td>
+              <td><code>2.2kΩ</code>＋黒線側の硬い足 → <b>8番 <code>GND</code></b></td>
               <td>上列・右から <b>8番目</b></td>
             </tr>
             <tr>
               <td><b>🟠 B（店内側）</b></td>
               <td><b><code>t</code></b> TX（<span style="color:#15803d;font-weight:800;">緑</span>）</td>
-              <td><b><code>1kΩ</code></b> を挟んで <b>17番 <code>GP13</code></b></td>
+              <td><code>1kΩ</code> 側の硬い足 → <b>17番 <code>GP13</code></b></td>
               <td>上列・左から <b>4番目</b></td>
             </tr>
             <tr>
               <td><b>🟠 B（店内側）</b></td>
               <td><b><code>g</code></b> GND（<b>黒</b>）</td>
-              <td><b>18番 <code>GND</code></b>（<b>17↔18番に <code>2.2kΩ</code> 橋渡し</b>）</td>
+              <td><code>2.2kΩ</code>＋黒線側の硬い足 → <b>18番 <code>GND</code></b></td>
               <td>上列・左から <b>3番目</b></td>
             </tr>
             <tr>
               <td><b>🔴 A・B 共通</b></td>
               <td><b><code>v</code></b> 5V（<span style="color:#dc2626;font-weight:800;">赤×2本</span>）</td>
-              <td><b>40番 <code>VBUS</code></b>（赤2本を直接）</td>
+              <td><b>40番 <code>VBUS</code></b>（赤2本をより合わせる）</td>
               <td>下列・<b>一番右の角</b></td>
             </tr>
           </tbody>
         </table>
 
         <div class="alert alert-warn" style="margin:0; display:flex; flex-direction:column; justify-content:center;">
-          <div style="font-weight:800; margin-bottom:0.35rem;">🔧 抵抗4本を薄型26mmケースに綺麗に収める 3つのコツ</div>
-          <div><b>① <code>2.2kΩ</code> は 2〜3mm 浮かせて隣の穴へ橋渡し：</b><code>7番↔8番</code>、<code>17番↔18番</code> はすぐ隣の穴です。少し浮かせておくと、万一 0件/秒 だったときにニッパーの刃がスッと入ります。</div>
-          <div><b>② 線は「表面」から出し、裸の足は絶縁：</b>裏へ飛び出た芯線は1mm以下に切り、緑線とつないだ <code>1kΩ</code> の裸の足はテープや熱収縮チューブで包みます。</div>
-          <div><b>③ 40番 VBUS に赤線2本：</b>被覆を3mmむき、2本をより合わせて予備はんだしてから40番へ付けます。</div>
+          <div style="font-weight:800; margin-bottom:0.35rem;">🔧 一番カンタンに組む 3つのコツ</div>
+          <div><b>① 1穴に硬い足1本だけ：</b>机の上で抵抗2本をねじって「2本足プラグ」にしてから挿せば、小さな穴にフニャフニャのより線を押し込む苦労がありません。</div>
+          <div><b>② 黒線は <code>2.2kΩ</code> の下側（穴寄り）へ：</b>基板から3〜4mm浮かせて付ければ、0件時に黒線より上で <code>2.2kΩ</code> だけニッパーで簡単に切り落とせます。</div>
+          <div><b>③ 裏に出た足は1mm以下に切る：</b><code>1kΩ</code> 周りはテープ等で絶縁し、40番 VBUS には赤線2本をより合わせて付けます。</div>
         </div>
       </div>
     </section>
@@ -1535,7 +1646,7 @@
             <li><b>閉める前に USB を挿して状態ページ（Pico W 自身の判定）を見る：</b>
               <ul>
                 <li><b><code>49〜50 件/秒</code> が出る</b> ➔ そのまま完成！抵抗2本とも残したまま USB を抜いて次へ。</li>
-                <li><b><code>0 件/秒</code> のまま</b> ➔ 3.3V信号のため分圧解除します。<b>隣の穴へ橋渡しした <code>2.2kΩ</code>（2本）の両足だけをニッパーで切り落とし</b>（緑線に入れた <code>1kΩ</code> は残したままOK！）、<code>49〜50 件/秒</code> が出ることを確認します。</li>
+                <li><b><code>0 件/秒</code> のまま</b> ➔ 3.3V信号のため分圧解除します。<b>黒線の結び目より上で <code>2.2kΩ</code>（2本）だけをニッパーで切り落とし</b>（<code>1kΩ</code> と黒線はそのまま穴に残します！）、<code>49〜50 件/秒</code> が出ることを確認します。</li>
               </ul>
             </li>
             <li><b>配線と抵抗を中央（6〜7mm 空間）へ寝かせてたたむ：</b>左端の上下角（押さえブロック2か所）・右端 micro-USB 真上（USB押さえ柱）・上下のツメ溝4か所に線を挟まないよう中央へ寄せます。</li>
